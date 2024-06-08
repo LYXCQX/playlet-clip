@@ -5,6 +5,8 @@
 # @time:2024/05/22 11:35
 # @file:chatgpt.py
 import os
+from dotenv import load_dotenv
+load_dotenv('.env')
 from openai import OpenAI
 
 from check import check_json

@@ -49,7 +49,7 @@ def update_all_failed_to_pending():
     )
     conn.commit()
     conn.close()
-    print("All failed tasks have been updated to pending.")
+    print("所有失败的任务都已更新为挂起。")
 
 
 def delete_task(task_id):
@@ -71,7 +71,7 @@ def delete_all_failed_tasks():
     cursor.execute("DELETE FROM tasks WHERE status = ?", (TaskStatus.failed,))
     conn.commit()
     conn.close()
-    print("All failed tasks have been deleted.")
+    print("所有失败的任务都已删除。")
 
 
 if __name__ == "__main__":
@@ -84,14 +84,14 @@ if __name__ == "__main__":
         "--update",
         nargs="+",
         metavar=("NEW_STATUS", "TASK_ID"),
-        help="Update task status, optionally for specific task IDs",
+        help="更新任务状态（可选）针对特定任务 ID",
     )
     parser.add_argument("-d", "--delete", metavar="TASK_ID", help="Delete a task")
     parser.add_argument(
         "-r",
         "--reset-failed",
         action="store_true",
-        help="Reset all failed tasks to pending",
+        help="将所有失败的任务重置为挂起",
     )
     parser.add_argument(
         "--delete-all-failed", action="store_true", help="Delete all failed tasks"
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     if args.list:
         failed_tasks = list_failed_tasks()
         if not failed_tasks:
-            print("No failed tasks found.")
+            print("未发现失败的任务。")
         else:
             for task in failed_tasks:
                 print(
@@ -123,21 +123,21 @@ if __name__ == "__main__":
             TaskStatus.completed,
             TaskStatus.failed,
         ):
-            print(f"Invalid status: {new_status}")
+            print(f"无效状态: {new_status}")
         else:
             update_task_status(task_ids, new_status)
             if task_ids:
-                print(f"Updated tasks {task_ids} to status {new_status}.")
+                print(f"将任务 {task_ids} 更新为状态 {new_status}.")
             else:
-                print(f"Updated all failed tasks to status {new_status}.")
+                print(f"已将所有失败的任务更新为状态 {new_status}.")
 
     if args.delete:
         task_id = int(args.delete)
         success = delete_task(task_id)
         if success:
-            print(f"Task {task_id} deleted.")
+            print(f"任务 {task_id} 已删除.")
         else:
-            print(f"Task {task_id} not found.")
+            print(f"未找到任务 {task_id}.")
 
     if args.reset_failed:
         update_all_failed_to_pending()

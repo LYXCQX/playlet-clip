@@ -4,3 +4,4 @@ edge_tts
 aiofiles
 mutagen
 fastapi
+python-dotenv

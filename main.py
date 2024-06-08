@@ -39,6 +39,7 @@ class Playlet:
             txt_path = os.path.join(path_, style.split("：")[0] + ".txt")
             out_path = os.path.join(path_, style.split("：")[0] + ".mp4")
             os.makedirs(path_, exist_ok=True)
+            os.makedirs(Config.video_path, exist_ok=True)
             if not os.path.exists(txt_path):
                 result = Chat().chat(Config.srt_path, Config.video_path, style)
                 with open(
@@ -227,7 +228,7 @@ class Playlet:
         duration (str): 截取的持续时间，格式同上。
         """
         if lz_path is None:
-            
+
             # 构建FFmpeg命令
             command = [
                 "ffmpeg",
@@ -260,7 +261,7 @@ class Playlet:
                 # '-c', 'copy',  # 使用相同的编码进行复制
                 "-filter_complex",
                 "[1:v]format=yuva444p,colorchannelmixer=aa=0.001[valpha];[0:v][valpha]overlay=(W-w):(H-h)",
-                "-ac", str(2), 
+                "-ac", str(2),
                 "-ar", str(24000),
                 output_path  # 输出文件
             ]
@@ -478,7 +479,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 1 and sys.argv[1] == "client":
         if len(sys.argv) != 3:
-            print("Usage: python main.py client <server_url>")
+            print("用法：python main.py 客户端<server_url>")
             sys.exit(1)
         server_url = sys.argv[2]
         Playlet().client(server_url)

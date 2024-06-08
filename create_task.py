@@ -98,19 +98,19 @@ def load_tasks_to_db(tasks):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Load tasks into the database from a directory"
+        description="将任务从目录加载到数据库中"
     )
     parser.add_argument(
-        "-d", "--directory", required=True, help="Directory to scan for tasks"
+        "-d", "--directory", required=True, help="要扫描任务的目录"
     )
     parser.add_argument(
-        "-e", "--blur_height", type=int, required=True, help="Height of the blur area"
+        "-e", "--blur_height", type=int, required=True, help="模糊区域的高度"
     )
     parser.add_argument(
-        "-b", "--blur_y", type=int, required=True, help="Y position of the blur area"
+        "-b", "--blur_y", type=int, required=True, help="模糊区域的 Y 位置"
     )
     parser.add_argument(
-        "-m", "--MarginV", type=int, required=True, help="Vertical margin for subtitles"
+        "-m", "--MarginV", type=int, required=True, help="字幕的垂直边距"
     )
 
     args = parser.parse_args()
@@ -118,4 +118,4 @@ if __name__ == "__main__":
     init_db()
     tasks = get_task_files(args.directory, args.blur_height, args.blur_y, args.MarginV)
     load_tasks_to_db(tasks)
-    print(f"Tasks have been loaded into the database from directory: {args.directory}")
+    print(f"任务已从目录加载到数据库中: {args.directory}")

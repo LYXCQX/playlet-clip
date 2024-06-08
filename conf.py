@@ -8,13 +8,13 @@
 
 class Config:
     # 单个视频路径
-    video_path = ""
+    video_path = "D:/IDEA/workspace/playlet-clip/resource/video/"
     # 单个srt路径
-    srt_path = ""
+    srt_path = "D:/IDEA/workspace/playlet-clip/resource/srt/"
     # ChatGPT API key 支持本地 和各类国内代理商
-    api_key = ""
+    api_key = "sk-ElXYrfSeKEjNUIj2SgRcXxreTlOW83KDKad17CHvgzSK5JO9"
     #  ChatGPT API 请求路由
-    base_url = ""
+    base_url = "https://api.chatanywhere.tech/v1/chat/completions"
     # 模型
     model = "gpt-4o"
     # 风格列表

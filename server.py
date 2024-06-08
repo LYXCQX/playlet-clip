@@ -128,7 +128,7 @@ def get_next_task():
             "status": TaskStatus.in_progress,
         }
     conn.close()
-    raise HTTPException(status_code=404, detail="No pending tasks available")
+    raise HTTPException(status_code=404, detail="没有可用的待处理任务")
 
 
 class TaskUpdate(BaseModel):
@@ -143,7 +143,7 @@ def update_task_status(task_id: int, task_update: TaskUpdate):
     row = cursor.fetchone()
     if row is None:
         conn.close()
-        raise HTTPException(status_code=404, detail="Task not found")
+        raise HTTPException(status_code=404, detail="未找到任务")
 
     cursor.execute(
         "UPDATE tasks SET status = ? WHERE id = ?", (task_update.status, task_id)
